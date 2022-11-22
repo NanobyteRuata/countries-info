@@ -1,24 +1,129 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  ViewChild,
+} from '@angular/core';
+import { TitleBarComponent } from '../../components/title-bar/title-bar.component';
 import { CountriesService } from '../../countries.service';
 
 @Component({
   selector: 'app-countries-list',
   templateUrl: './countries-list.component.html',
-  styleUrls: ['./countries-list.component.scss']
+  styleUrls: ['./countries-list.component.scss'],
 })
-export class CountriesListComponent implements OnInit {
-  countries: any[] = []
+export class CountriesListComponent {
+  isFetchingCountries: boolean = true;
+  searchValue: string = '';
+  sortBy: string = 'nameAesc';
+  showBackToTop: boolean = false;
 
-  constructor(private countriesService: CountriesService) {
-    this.countriesService.getAllCountries().subscribe(res => {
-      if(Array.isArray(res)) {
-        console.log(res);
-        this.countries = res
-      }
-    }, err => console.error(err))
+  private _countries: any[] = [];
+  get countries() {
+    let tempCountries = [...this._countries];
+
+    if (this.searchValue.length > 0) {
+      let filteredByCommonName = this._countries.filter((c) =>
+        (c.name.common as string).includes(this.searchValue)
+      );
+
+      let filteredByCapital = this._countries.filter((c) =>
+        c.capital
+          ? c.capital.filter((cap: string) => cap.includes(this.searchValue))
+              .length > 0
+          : false
+      );
+
+      // Combine and remove duplicate
+      tempCountries = [
+        ...new Set([...filteredByCommonName, ...filteredByCapital]),
+      ];
+    }
+
+    switch (this.sortBy) {
+      case 'nameAesc':
+        tempCountries.sort((a, b) =>
+          a.name.common.localeCompare(b.name.common)
+        );
+        break;
+      case 'nameDesc':
+        tempCountries.sort((a, b) =>
+          b.name.common.localeCompare(a.name.common)
+        );
+        break;
+      case 'populationAesc':
+        tempCountries.sort((a, b) => a.population - b.population);
+        break;
+      case 'populationDesc':
+        tempCountries.sort((a, b) => a.population - b.population).reverse();
+        break;
+    }
+
+    return tempCountries;
   }
 
-  ngOnInit(): void {
+  constructor(
+    private countriesService: CountriesService,
+    private elementRef: ElementRef
+  ) {
+    this.countriesService.getAllCountries().subscribe(
+      (res) => {
+        if (Array.isArray(res)) {
+          console.log(res);
+          setTimeout(() => {
+            this._countries = res;
+            this.isFetchingCountries = false;
+          }, 2000);
+        }
+      },
+      (err) => console.error(err)
+    );
   }
 
+  @HostListener('scroll', ['$event'])
+  onScroll = (event: any) => {
+    this.showBackToTop = event.target.scrollTop > document.body.clientHeight;
+  };
+
+  onNameSortClicked() {
+    switch (this.sortBy) {
+      case 'populationAesc':
+        this.sortBy = 'nameAesc';
+        break;
+      case 'populationDesc':
+        this.sortBy = 'nameAesc';
+        break;
+      case 'nameDesc':
+        this.sortBy = 'nameAesc';
+        break;
+      case 'nameAesc':
+        this.sortBy = 'nameDesc';
+        break;
+    }
+  }
+
+  onPopulationSortClicked() {
+    switch (this.sortBy) {
+      case 'nameAesc':
+        this.sortBy = 'populationAesc';
+        break;
+      case 'nameDesc':
+        this.sortBy = 'populationAesc';
+        break;
+      case 'populationDesc':
+        this.sortBy = 'populationAesc';
+        break;
+      case 'populationAesc':
+        this.sortBy = 'populationDesc';
+        break;
+    }
+  }
+
+  onBackToTopClicked() {
+    this.elementRef.nativeElement.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
 }

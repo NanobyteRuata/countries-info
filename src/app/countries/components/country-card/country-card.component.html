@@ -1,7 +1,35 @@
 <ng-container *ngIf="country">
-    <nz-card [nzTitle]="country.name.official">
-        <p>Card content</p>
-        <p>Card content</p>
-        <p>Card content</p>
-    </nz-card>
+  <nz-card>
+    <div
+      style="display: flex; justify-content: space-between; align-items: center"
+    >
+      <div>
+        <div style="display: flex; align-items: center">
+          <img style="width: 32px; height: auto" [src]="country.flags.png" />
+          <h2 style="margin: 0 8px">{{ country.name.common }}</h2>
+        </div>
+        <div style="display: flex; align-items: center">
+          <span style="color: gray"
+            >{{ country.capital && country.capital + "," }}
+            <i style="font-weight: lighter">{{
+              country.subregion && country.subregion
+            }}</i></span
+          >
+        </div>
+      </div>
+
+      <div style="text-align: right">
+        Population
+        <div>
+          <span nz-icon nzType="team" nzTheme="outline"></span>
+          {{ country.population | number: "1.0":"en-US" }}
+        </div>
+      </div>
+    </div>
+  </nz-card>
+  <ng-template #titleTemplate> </ng-template>
+  <ng-template #extraTemplate>
+    <span nz-icon nzType="team" nzTheme="outline"></span>
+    {{ country.population | number: "1.0":"en-US" }}
+  </ng-template>
 </ng-container>

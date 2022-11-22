@@ -7,16 +7,16 @@ import { CountriesComponent } from './countries.component';
 import { CountryCardComponent } from './components/country-card/country-card.component';
 import { TitleBarComponent } from './components/title-bar/title-bar.component';
 import { CountriesService } from './countries.service';
-
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [CountriesListComponent, CountriesComponent, CountryCardComponent, TitleBarComponent],
-  imports: [
-    CountriesRoutingModule,
-    CommonModule,
-    SharedModule
+  declarations: [
+    CountriesListComponent,
+    CountriesComponent,
+    CountryCardComponent,
+    TitleBarComponent,
   ],
-  providers: [CountriesService]
+  imports: [CountriesRoutingModule, CommonModule, FormsModule, SharedModule],
+  providers: [CountriesService],
 })
-export class CountriesModule { }
+export class CountriesModule {}

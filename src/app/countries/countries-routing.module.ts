@@ -5,14 +5,13 @@ import { CountriesListComponent } from './pages/countries-list/countries-list.co
 
 const routes: Routes = [
   {
-    path: '', component: CountriesComponent, children: [
-      { path: '', component: CountriesListComponent }
-    ]
-  }
+    path: '',
+    component: CountriesListComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class CountriesRoutingModule { }
+export class CountriesRoutingModule {}
