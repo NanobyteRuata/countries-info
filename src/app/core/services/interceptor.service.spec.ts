@@ -1,8 +1,4 @@
-import {
-  HttpErrorResponse,
-  HttpHandler,
-  HttpRequest,
-} from '@angular/common/http';
+import { HttpErrorResponse, HttpRequest } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {

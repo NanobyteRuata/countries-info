@@ -14,7 +14,6 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { InterceptorService } from './services/interceptor.service';
 import { UnderlineMatchPipe } from './pipes/underline-match.pipe';
 
 @NgModule({
@@ -28,15 +27,13 @@ import { UnderlineMatchPipe } from './pipes/underline-match.pipe';
     CountriesRoutingModule,
     CommonModule,
     FormsModule,
-    SharedModule, 
-    NzCardModule, 
-    NzInputModule, 
-    NzButtonModule, 
-    NzTableModule, 
-    NzDividerModule
+    SharedModule,
+    NzCardModule,
+    NzInputModule,
+    NzButtonModule,
+    NzTableModule,
+    NzDividerModule,
   ],
-  providers: [CountriesService, {
-    provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true
-    }],
+  providers: [CountriesService],
 })
-export class CountriesModule { }
+export class CountriesModule {}

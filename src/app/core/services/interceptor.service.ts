@@ -7,12 +7,10 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class InterceptorService implements HttpInterceptor {
   constructor(private notificationService: NzNotificationService) {}
 
