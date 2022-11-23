@@ -21,7 +21,6 @@ export class InterceptorService implements HttpInterceptor {
     return next.handle(req).pipe(
       // Handle error responses
       catchError((error) => {
-        console.log(error);
         try {
           if (error instanceof HttpErrorResponse) {
             // Blame network connection if status is not 2xx - 5xx
