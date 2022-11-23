@@ -2,31 +2,78 @@
 
 <!-- Main content -->
 <div class="countries_content">
+  <!-- Sort filters -->
   <div class="sort-container">
-    <span class="sort" (click)="onNameSortClicked()" [ngClass]="{
+    <span
+      class="sort"
+      (click)="onNameSortClicked()"
+      [ngClass]="{
         isNameSortActive: sortBy == 'nameAesc' || sortBy == 'nameDesc'
-      }">Name
-      <span *ngIf="sortBy == 'nameAesc'" nz-icon nzType="sort-ascending" nzTheme="outline"></span><span
-        *ngIf="sortBy == 'nameDesc'" nz-icon nzType="sort-descending" nzTheme="outline"></span></span>
-    <span class="sort" (click)="onPopulationSortClicked()" [ngClass]="{
+      }"
+      >Name
+      <span
+        *ngIf="sortBy == 'nameAesc'"
+        nz-icon
+        nzType="sort-ascending"
+        nzTheme="outline"
+      ></span
+      ><span
+        *ngIf="sortBy == 'nameDesc'"
+        nz-icon
+        nzType="sort-descending"
+        nzTheme="outline"
+      ></span
+    ></span>
+
+    <span
+      class="sort"
+      (click)="onPopulationSortClicked()"
+      [ngClass]="{
         isNameSortActive:
           sortBy == 'populationAesc' || sortBy == 'populationDesc'
-      }">Population
-      <span *ngIf="sortBy == 'populationDesc'" nz-icon nzType="caret-down" nzTheme="outline"></span>
-      <span *ngIf="sortBy == 'populationAesc'" nz-icon nzType="caret-up" nzTheme="outline"></span>
+      }"
+      >Population
+      <span
+        *ngIf="sortBy == 'populationDesc'"
+        nz-icon
+        nzType="caret-down"
+        nzTheme="outline"
+      ></span>
+      <span
+        *ngIf="sortBy == 'populationAesc'"
+        nz-icon
+        nzType="caret-up"
+        nzTheme="outline"
+      ></span>
     </span>
   </div>
+
+  <!-- Loop Country Cards -->
   <div>
-    <span *ngIf="isFetchingCountries" nz-icon nzType="loading" nzTheme="outline"></span>
+    <span
+      *ngIf="isFetchingCountries"
+      nz-icon
+      nzType="loading"
+      nzTheme="outline"
+    ></span>
 
     <ng-container *ngFor="let country of countries">
-      <app-country-card [searchValue]="searchValue" [country]="country"></app-country-card>
+      <app-country-card
+        [searchValue]="searchValue"
+        [country]="country"
+      ></app-country-card>
     </ng-container>
   </div>
 </div>
 
 <!-- Back to top button -->
-<button *ngIf="showBackToTop" class="btnBackToTop" nz-button nzType="primary" nzShape="circle"
-  (click)="onBackToTopClicked()">
+<button
+  *ngIf="showBackToTop"
+  class="btnBackToTop"
+  nz-button
+  nzType="primary"
+  nzShape="circle"
+  (click)="onBackToTopClicked()"
+>
   <span nz-icon nzType="up"></span>
 </button>

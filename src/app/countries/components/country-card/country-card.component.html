@@ -3,13 +3,20 @@
     <div class="left-content">
       <div class="title-container">
         <img [src]="country.flags.png" />
-        <h2 [innerHTML]="country.name.common | underlineMatch: searchValue"></h2>
+        <h2
+          [innerHTML]="country.name.common | underlineMatch: searchValue"
+        ></h2>
       </div>
       <div class="subtitle-container">
-        <span *ngIf="country.capital"><span [innerHTML]="country.capital[0] | underlineMatch: searchValue"></span>,&nbsp;</span>
-        <span *ngIf="country.subregion"><i
-          class="region">{{ country.subregion
-          }}</i></span>
+        <span *ngIf="country.capital"
+          ><span
+            [innerHTML]="country.capital[0] | underlineMatch: searchValue"
+          ></span
+          >,&nbsp;</span
+        >
+        <span *ngIf="country.subregion"
+          ><i class="region">{{ country.subregion }}</i></span
+        >
       </div>
     </div>
 

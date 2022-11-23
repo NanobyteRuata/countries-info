@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 import { TitleBarComponent } from './title-bar.component';
 
@@ -8,9 +10,9 @@ describe('TitleBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TitleBarComponent ]
-    })
-    .compileComponents();
+      imports: [NzInputModule, FormsModule],
+      declarations: [TitleBarComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TitleBarComponent);
     component = fixture.componentInstance;
