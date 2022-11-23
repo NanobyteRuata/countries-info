@@ -1,12 +1,9 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   HostListener,
-  ViewChild,
 } from '@angular/core';
-import { TitleBarComponent } from '../../components/title-bar/title-bar.component';
-import { CountriesService } from '../../countries.service';
+import { CountriesService } from '../../services/countries.service';
 
 @Component({
   selector: 'app-countries-list',
@@ -31,7 +28,7 @@ export class CountriesListComponent {
       let filteredByCapital = this._countries.filter((c) =>
         c.capital
           ? c.capital.filter((cap: string) => cap.includes(this.searchValue))
-              .length > 0
+            .length > 0
           : false
       );
 
@@ -67,18 +64,14 @@ export class CountriesListComponent {
     private countriesService: CountriesService,
     private elementRef: ElementRef
   ) {
-    this.countriesService.getAllCountries().subscribe(
-      (res) => {
+    this.countriesService.getAllCountries().subscribe({
+      next: (res) => {
         if (Array.isArray(res)) {
-          console.log(res);
-          setTimeout(() => {
-            this._countries = res;
-            this.isFetchingCountries = false;
-          }, 2000);
+          this._countries = res;
+          this.isFetchingCountries = false;
         }
-      },
-      (err) => console.error(err)
-    );
+      }
+    });
   }
 
   @HostListener('scroll', ['$event'])

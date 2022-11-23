@@ -1,3 +1,40 @@
 nz-card {
   margin-bottom: 8px;
+  
+  .card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .left-content {
+      .title-container {
+        display: flex;
+        align-items: center;
+  
+        img {
+          width: 32px; 
+          height: auto;
+        }
+  
+        h2 {
+          margin: 0 8px;
+          text-align: left;
+        }
+      }
+  
+      .subtitle-container {
+        display: flex;
+        align-items: center;
+        color: gray;
+
+        .region {
+          font-weight: lighter;
+        }
+      }
+    }
+
+    .right-content {
+      text-align: right;
+    }
+  }
 }

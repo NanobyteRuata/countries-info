@@ -1,35 +1,24 @@
-<ng-container *ngIf="country">
-  <nz-card>
-    <div
-      style="display: flex; justify-content: space-between; align-items: center"
-    >
-      <div>
-        <div style="display: flex; align-items: center">
-          <img style="width: 32px; height: auto" [src]="country.flags.png" />
-          <h2 style="margin: 0 8px">{{ country.name.common }}</h2>
-        </div>
-        <div style="display: flex; align-items: center">
-          <span style="color: gray"
-            >{{ country.capital && country.capital + "," }}
-            <i style="font-weight: lighter">{{
-              country.subregion && country.subregion
-            }}</i></span
-          >
-        </div>
+<nz-card *ngIf="country">
+  <div class="card-content">
+    <div class="left-content">
+      <div class="title-container">
+        <img [src]="country.flags.png" />
+        <h2 [innerHTML]="country.name.common | underlineMatch: searchValue"></h2>
       </div>
-
-      <div style="text-align: right">
-        Population
-        <div>
-          <span nz-icon nzType="team" nzTheme="outline"></span>
-          {{ country.population | number: "1.0":"en-US" }}
-        </div>
+      <div class="subtitle-container">
+        <span *ngIf="country.capital"><span [innerHTML]="country.capital[0] | underlineMatch: searchValue"></span>,&nbsp;</span>
+        <span *ngIf="country.subregion"><i
+          class="region">{{ country.subregion
+          }}</i></span>
       </div>
     </div>
-  </nz-card>
-  <ng-template #titleTemplate> </ng-template>
-  <ng-template #extraTemplate>
-    <span nz-icon nzType="team" nzTheme="outline"></span>
-    {{ country.population | number: "1.0":"en-US" }}
-  </ng-template>
-</ng-container>
+
+    <div class="right-content">
+      Population
+      <div>
+        <span nz-icon nzType="team" nzTheme="outline"></span>
+        {{ country.population | number: "1.0":"en-US" }}
+      </div>
+    </div>
+  </div>
+</nz-card>

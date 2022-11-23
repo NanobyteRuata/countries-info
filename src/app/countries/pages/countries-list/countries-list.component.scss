@@ -6,6 +6,13 @@
   overflow: auto;
   height: 100vh;
 
+  .btnBackToTop {
+    position: absolute;
+    right: 32px;
+    bottom: 32px;
+    z-index: 1;
+  }
+
   .countries_content {
     flex: 1;
     max-width: 720px;
@@ -13,13 +20,21 @@
     margin: 58px auto 0;
     align-items: center;
     padding: 16px 16px 0;
+    text-align: center;
 
-    .sort {
-      cursor: pointer;
-    }
+    .sort-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 4px;
 
-    .isNameSortActive {
-      color: blue;
+      .sort {
+        cursor: pointer;
+      }
+  
+      .isNameSortActive {
+        color: blue;
+      }
     }
   }
 }

@@ -3,7 +3,6 @@ import {
   ElementRef,
   EventEmitter,
   Input,
-  OnInit,
   Output,
 } from '@angular/core';
 
@@ -12,8 +11,9 @@ import {
   templateUrl: './title-bar.component.html',
   styleUrls: ['./title-bar.component.scss'],
 })
-export class TitleBarComponent implements OnInit {
-  @Input('searchValue') searchValue: string = '';
+export class TitleBarComponent {
+  @Input('title') title!: string;
+  @Input('searchValue') searchValue!: string;
   @Output('searchValueChange') searchValueChange: EventEmitter<string> =
     new EventEmitter();
 
@@ -22,6 +22,4 @@ export class TitleBarComponent implements OnInit {
   onSearchValueChange = (value: string) => {
     this.searchValueChange.emit(value);
   };
-
-  ngOnInit(): void {}
 }
