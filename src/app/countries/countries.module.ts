@@ -13,7 +13,6 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UnderlineMatchPipe } from './pipes/underline-match.pipe';
 
 @NgModule({
