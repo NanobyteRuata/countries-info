@@ -11,17 +11,9 @@ import { CoreModule } from './core/core.module';
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  imports: [
-    CoreModule,
-    AppRoutingModule,
-    CountriesModule,
-  ],
-  providers: [
-    { provide: NZ_I18N, useValue: en_US }
-  ],
-  bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  imports: [CoreModule, AppRoutingModule],
+  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
